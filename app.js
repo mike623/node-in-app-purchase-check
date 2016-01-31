@@ -92,11 +92,6 @@ function formatError(iosErrorCode) {
   return err;
 }
 
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
 
 /**
  * transaction {Object} contains base64 receipt
@@ -182,6 +177,13 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+app.use(function(err, req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 
 var debug = require('debug')('checkpurchase');
 
