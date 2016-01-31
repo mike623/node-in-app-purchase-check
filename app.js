@@ -92,12 +92,19 @@ function formatError(iosErrorCode) {
   return err;
 }
 
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 /**
  * transaction {Object} contains base64 receipt
  * isSandBox {String} 'true'|'false'
  * password {String}
  */
 app.all('/verify', function(req, res) {
+  
   console.log(req.body);
 
   var transaction = req.param('transaction');
